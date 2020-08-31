@@ -34,7 +34,7 @@ PRETRAINED_WEIGHTS = {
                 'sha256': '027fd2cced3cbea0c4f5894bb8e9e85bac04f11daf96b8fdcf1e4ee95dcf51b9'
             },
             'top': {
-                'url': 'https://www.mediafire.com/file/pkj2p29b1f6fpil/crnn_kurapan.h5/file',
+                'url': 'https://download2260.mediafire.com/726aptv1tqqg/pkj2p29b1f6fpil/crnn_kurapan.h5',
                 'filename': 'crnn_kurapan.h5',
                 'sha256': 'a7d8086ac8f5c3d6a0a828f7d6fbabcaf815415dd125c32533013f85603be46d'
             }
