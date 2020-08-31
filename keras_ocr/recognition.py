@@ -308,7 +308,7 @@ class Recognizer:
         include_top: Whether to include the final classification layer in the model (set
             to False to use a custom alphabet).
     """
-    def __init__(self, alphabet=None, weights='kurapan', build_params=None):
+    def __init__(self, alphabet=None, weights='kurapan', build_params=None, weights_url='crnn_kurapan.h5'):
         assert alphabet or weights, 'At least one of alphabet or weights must be provided.'
         if weights is not None:
             build_params = build_params or PRETRAINED_WEIGHTS[weights]['build_params']
@@ -323,17 +323,19 @@ class Recognizer:
         if weights is not None:
             weights_dict = PRETRAINED_WEIGHTS[weights]
             if alphabet == weights_dict['alphabet']:
-                self.model.load_weights(
-                    tools.download_and_verify(url=weights_dict['weights']['top']['url'],
-                                              filename=weights_dict['weights']['top']['filename'],
-                                              sha256=weights_dict['weights']['top']['sha256']))
+                self.model.load_weights(weights_url)
+                #self.model.load_weights(
+                #    tools.download_and_verify(url=weights_dict['weights']['top']['url'],
+                #                              filename=weights_dict['weights']['top']['filename'],
+                #                              sha256=weights_dict['weights']['top']['sha256']))
             else:
                 print('Provided alphabet does not match pretrained alphabet. '
                       'Using backbone weights only.')
-                self.backbone.load_weights(
-                    tools.download_and_verify(url=weights_dict['weights']['notop']['url'],
-                                              filename=weights_dict['weights']['notop']['filename'],
-                                              sha256=weights_dict['weights']['notop']['sha256']))
+                self.backbone.load_weights(weights_url)
+                #self.backbone.load_weights(
+                #    tools.download_and_verify(url=weights_dict['weights']['notop']['url'],
+                #                              filename=weights_dict['weights']['notop']['filename'],
+                #                              sha256=weights_dict['weights']['notop']['sha256']))
 
     def get_batch_generator(self, image_generator, batch_size=8, lowercase=False):
         """
